@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Search Router</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background-color: #212121; color: #ececec; display: flex; flex-direction: column; height: 100vh; }
+        
+        .top-nav {
+            background-color: #171717;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2f2f2f;
+        }
+        .logo { font-weight: bold; font-size: 1.1rem; color: #b4b4b4; }
+        .nav-btn {
+            background-color: #2f2f2f;
+            color: #ececec;
+            border: 1px solid #424242;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-btn:hover { background-color: #424242; color: #fff; }
+
+        .search-container {
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+            padding: 30px;
+            background-color: #2f2f2f;
+            border: 1px solid #424242;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        h3 { margin-bottom: 20px; color: #8ab4f8; }
+
+        #search-input { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border-radius: 24px; 
+            border: 1px solid #5f6368; 
+            background-color: #202124; 
+            color: white; 
+            font-size: 1rem; 
+            outline: none;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .engine-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #171717;
+            transition: opacity 0.2s;
+        }
+
+        .google-btn { background-color: #8ab4f8; }
+        .unsplash-btn { background-color: #a3e635; }
+        
+        .engine-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="logo">Image Hub Router</div>
+        <a href="l.html" class="nav-btn">← Back to AI Chat</a>
+    </div>
+
+    <div class="search-container">
+        <h3>Search External Engines</h3>
+        <input type="text" id="search-input" placeholder="Type a topic (e.g. Mt. St. Helens)...">
+        
+        <div class="btn-grid">
+            <button class="engine-btn google-btn" onclick="launchSearch('google')">Open Google Images ↗</button>
+            <button class="engine-btn unsplash-btn" onclick="launchSearch('unsplash')">Open Unsplash Photos ↗</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('search-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { launchSearch('google'); }
+        });
+
+                     function launchSearch(engine) {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) return;
+
+            let targetUrl = "";
+
+            if (engine === 'google') {
+                // Completely new, bulletproof address structure that never squishes words
+                targetUrl = "https://google.com" + encodeURIComponent(query);
+            } else if (engine === 'unsplash') {
+                targetUrl = "https://unsplash.com" + encodeURIComponent(query);
+            }
+
+            // Fire the clean path string out into a new tab
+            window.open(targetUrl, '_blank');
+        }
+
+            window.open(targetUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
